@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A-FINA — Виртуальный казначей для 1С</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #1B3A6B;
+  --navy-dark: #112850;
+  --navy-light:#2A4F8A;
+  --blue:      #0079C2;
+  --aqua:      #00AEEF;
+  --aqua-dark: #0090D0;
+  --aqua-light:#E8F7FD;
+  --purple:    #8045B0;
+  --pink:      #E12991;
+  --storm:     #687480;
+  --sky:       #EEF6FC;
+  --sky-mid:   #A7B9CF;
+  --gold:      #FFCB05;
+  --gold-light:#FFF9E0;
+  --success:   #22A352;
+  --success-bg:#EDFAF3;
+  --error:     #D93025;
+  --error-bg:  #FEF0EE;
+  --white:     #FFFFFF;
+  --off-white: #F8FAFB;
+  --border:    #E2EBF3;
+  --body-text: #687480;
+  --grad: linear-gradient(90deg, #00AEEF 0%, #8045B0 55%, #E12991 100%);
+  --grad-text: linear-gradient(90deg, #00AEEF, #8045B0 50%, #E12991);
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-2xl:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);background:var(--white);line-height:1.6}
+
+
+/* ══ NAVBAR ══ */
+.navbar{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.navbar::before{content:'';display:block;height:3px;background:var(--grad)}
+.navbar-inner{
+  max-width:1120px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:68px;
+}
+
+/* LOGO */
+.navbar-logo{display:flex;align-items:center;gap:0;text-decoration:none}
+.logo-svg-wrap{height:44px;display:flex;align-items:center}
+/* Кнопка ЛК */
+.btn-lk{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:var(--r-md);
+  font-size:13px;font-weight:600;font-family:'Inter',sans-serif;
+  cursor:pointer;border:1.5px solid var(--border);
+  background:var(--white);color:var(--navy);
+  text-decoration:none;transition:all .15s;
+}
+.btn-lk:hover{border-color:var(--navy);background:var(--sky)}
+
+.navbar-nav{display:flex;align-items:center;gap:32px}
+.navbar-link{font-size:14px;font-weight:500;color:var(--storm);text-decoration:none;transition:color .15s}
+.navbar-link:hover{color:var(--navy)}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 22px;border-radius:var(--r-md);
+  font-size:14px;font-weight:600;font-family:'Inter',sans-serif;
+  cursor:pointer;border:none;transition:all .2s;text-decoration:none;
+}
+.btn-primary{background:var(--aqua);color:var(--white)}
+.btn-primary:hover{background:var(--aqua-dark)}
+.btn-navy{background:var(--navy);color:var(--white)}
+.btn-navy:hover{background:var(--navy-dark)}
+.btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.btn-outline:hover{background:var(--sky)}
+.btn-gold{background:var(--gold);color:var(--navy-dark)}
+.btn-gold:hover{filter:brightness(.95)}
+
+/* ══ HERO ══ — белый, светлый */
+.hero{
+  background:var(--white);
+  padding:80px 40px 80px;
+  border-bottom:1px solid var(--border);
+}
+.hero-inner{
+  max-width:1120px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 460px;gap:72px;align-items:center;
+}
+.hero-eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--aqua);margin-bottom:16px;
+}
+
+.hero-h1{
+  font-size:52px;font-weight:900;line-height:1.05;letter-spacing:-2px;
+  color:var(--navy);margin-bottom:12px;
+}
+
+.gradient-text{
+  background:var(--grad-text);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-sub{
+  font-size:18px;font-weight:400;color:var(--storm);
+  line-height:1.7;max-width:500px;margin-bottom:36px;
+}
+
+/* stats bar — как в бренд-буке */
+.hero-stats{
+  display:inline-flex;border:1px solid var(--border);
+  border-radius:var(--r-xl);overflow:hidden;margin-bottom:32px;
+}
+.hero-stat{padding:14px 24px;border-right:1px solid var(--border);background:var(--off-white)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-val{font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.5px}
+.hero-stat-lbl{font-size:11px;color:var(--storm);margin-top:2px}
+
+.hero-actions{display:flex;align-items:center;gap:12px}
+.btn-lg{padding:14px 28px;font-size:15px;border-radius:var(--r-lg)}
+
+/* Hero proof */
+.hero-proof{display:flex;align-items:center;gap:20px;margin-top:20px;flex-wrap:wrap}
+.proof-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--sky-mid)}
+.proof-check{color:var(--success);font-weight:700}
+
+/* ══ HERO RIGHT — результаты ══ */
+.hero-right{
+  background:var(--off-white);border:1px solid var(--border);
+  border-radius:var(--r-2xl);overflow:hidden;
+}
+.hero-right-head{
+  background:var(--navy);padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hero-right-title{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.live-badge{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:600;color:var(--success);
+}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero-right-body{padding:0}
+
+.doc-row{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 24px;border-bottom:1px solid var(--border);
+  background:var(--white);
+}
+.doc-row:last-child{border-bottom:none}
+.doc-row.processing{background:rgba(0,174,239,.03)}
+.doc-icon{
+  width:36px;height:36px;border-radius:var(--r-md);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.doc-icon.pdf{background:rgba(217,48,37,.1)}
+.doc-icon.email{background:var(--aqua-light)}
+.doc-icon.edo{background:rgba(128,69,176,.1)}
+.doc-info{flex:1;min-width:0}
+.doc-name{font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-meta{font-size:11px;color:var(--sky-mid);margin-top:1px}
+.doc-status{flex-shrink:0}
+.status-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:20px;
+  font-size:11px;font-weight:600;
+}
+.s-done{background:var(--success-bg);color:#15803D}
+.s-proc{background:var(--aqua-light);color:var(--blue)}
+.s-wait{background:var(--off-white);color:var(--sky-mid);border:1px solid var(--border)}
+
+.hero-right-footer{
+  padding:16px 24px;background:var(--off-white);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-stat{text-align:center}
+.footer-stat-val{font-size:18px;font-weight:800;color:var(--navy)}
+.footer-stat-lbl{font-size:10px;color:var(--sky-mid);text-transform:uppercase;letter-spacing:.5px}
+
+/* ══ SECTION COMMON ══ */
+.section{padding:80px 40px;border-bottom:1px solid var(--border)}
+.section-inner{max-width:1120px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--aqua);margin-bottom:10px}
+.section-h{font-size:36px;font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1.15;margin-bottom:14px}
+.section-p{font-size:17px;color:var(--storm);max-width:580px;line-height:1.75;margin-bottom:48px}
+
+/* ══ HOW ══ */
+.how-section{background:var(--white)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+.steps::before{
+  content:'';position:absolute;top:28px;left:calc(16.67% + 28px);right:calc(16.67% + 28px);
+  height:1px;background:var(--border);z-index:0;
+}
+.step{padding:0;position:relative;z-index:1}
+.step-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--white);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(27,58,107,.06);
+}
+.step-title{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.step-text{font-size:14px;color:var(--storm);line-height:1.65}
+.step-sources{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.source-tag{
+  font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;
+  background:var(--aqua-light);color:var(--blue);
+}
+
+/* ══ RESULTS ══ */
+.results-section{background:var(--sky)}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.result-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:28px;
+}
+.result-num{font-size:48px;font-weight:900;color:var(--navy);letter-spacing:-2px;line-height:1}
+.result-unit{font-size:20px;font-weight:700;color:var(--aqua)}
+.result-label{font-size:14px;color:var(--storm);margin-top:8px;line-height:1.5}
+.result-vs{margin-top:12px;display:flex;align-items:center;gap:8px;font-size:13px}
+.result-old{color:var(--error);text-decoration:line-through;font-weight:600}
+.result-new{color:var(--success);font-weight:700}
+
+/* ══ PRICING ══ */
+.pricing-section{background:var(--white)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{
+  border:1.5px solid var(--border);border-radius:var(--r-2xl);
+  padding:28px;position:relative;
+}
+.plan:hover{border-color:var(--aqua);box-shadow:0 6px 24px rgba(0,174,239,.1)}
+.plan.featured{border-color:var(--aqua);box-shadow:0 6px 32px rgba(0,174,239,.15)}
+.plan-popular{
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--grad);color:var(--white);
+  font-size:10px;font-weight:700;letter-spacing:.5px;
+  padding:3px 14px;border-radius:20px;white-space:nowrap;
+}
+.plan-name{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sky-mid);margin-bottom:8px}
+.plan-price{display:flex;align-items:baseline;gap:4px;margin-bottom:4px}
+.plan-num{font-size:44px;font-weight:900;color:var(--navy);letter-spacing:-1.5px;line-height:1}
+.plan-per{font-size:15px;color:var(--storm)}
+.plan-vol{font-size:12px;color:var(--sky-mid);margin-bottom:20px}
+.plan-feats{list-style:none;margin-bottom:24px}
+.plan-feats li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--storm);padding:6px 0;border-bottom:1px solid var(--border);line-height:1.5}
+.plan-feats li:last-child{border-bottom:none}
+.fc{color:var(--success);font-weight:700;flex-shrink:0;margin-top:1px}
+.plan-btn{
+  width:100%;padding:11px;border-radius:var(--r-lg);
+  font-size:14px;font-weight:700;font-family:'Inter',sans-serif;
+  cursor:pointer;transition:all .2s;border:none;
+}
+.plan-btn-primary{background:var(--aqua);color:var(--white)}
+.plan-btn-primary:hover{background:var(--aqua-dark)}
+.plan-btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--border)}
+.plan-btn-outline:hover{border-color:var(--aqua);color:var(--aqua)}
+.pricing-note{text-align:center;margin-top:20px;font-size:13px;color:var(--sky-mid)}
+
+/* ══ FORM ══ */
+.form-section{background:var(--navy);padding:80px 40px;position:relative;overflow:hidden}
+.form-section::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
+.form-section::after{
+  content:'';position:absolute;top:-120px;right:-100px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,174,239,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.form-inner{max-width:560px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.form-h{font-size:36px;font-weight:900;color:var(--white);letter-spacing:-1px;margin-bottom:10px;line-height:1.1}
+.form-sub{font-size:16px;color:rgba(255,255,255,.55);margin-bottom:36px;line-height:1.65}
+.free-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,203,5,.12);border:1px solid rgba(255,203,5,.2);
+  border-radius:var(--r-xl);padding:8px 18px;
+  font-size:13px;font-weight:600;color:var(--gold);
+  margin-bottom:24px;
+}
+.form-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r-2xl);padding:32px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.form-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.3px;text-align:left}
+.form-input{
+  padding:11px 14px;border-radius:var(--r-md);
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  color:var(--white);font-size:14px;font-family:'Inter',sans-serif;
+  outline:none;transition:border-color .15s;
+}
+.form-input::placeholder{color:rgba(255,255,255,.25)}
+.form-input:focus{border-color:var(--aqua)}
+.form-select{
+  padding:11px 14px;border-radius:var(--r-md);
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.7);font-size:14px;font-family:'Inter',sans-serif;
+  outline:none;cursor:pointer;
+}
+.form-select option{background:var(--navy-dark);color:var(--white)}
+.btn-submit{
+  width:100%;padding:15px;border-radius:var(--r-lg);
+  font-size:15px;font-weight:700;font-family:'Inter',sans-serif;
+  cursor:pointer;border:none;transition:all .2s;margin-top:4px;
+}
+.btn-submit:hover{transform:translateY(-1px)}
+.btn-submit-aqua{background:var(--aqua);color:var(--white)}
+.btn-submit-aqua:hover{background:var(--aqua-dark);box-shadow:0 6px 20px rgba(0,174,239,.3)}
+.btn-submit-gold{background:var(--gold);color:var(--navy-dark)}
+.btn-submit-gold:hover{filter:brightness(.95);box-shadow:0 6px 20px rgba(255,203,5,.3)}
+.form-fine{font-size:11px;color:rgba(255,255,255,.25);margin-top:12px;line-height:1.5}
+
+/* ══ FOOTER ══ */
+.footer{background:var(--navy-dark);padding:28px 40px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{display:flex;align-items:center}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.2)}
+.footer-links{display:flex;gap:20px}
+.footer-link{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none}
+.footer-link:hover{color:rgba(255,255,255,.6)}
+
+@media(max-width:900px){
+  .hero-inner,.steps,.results-grid,.pricing-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .steps::before{display:none}
+}
+</style>
+</head>
+<body>
+
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <!-- Логотип — точно из бренд-бука, Navy на белом -->
+    <a href="#" class="navbar-logo">
+      <div class="logo-svg-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 363 212" style="height:44px;width:auto;display:block;">
+          <g transform="matrix(0.6585365853658536 0 0 0.6585365853658536 181.82926827457777 110.70324390243908)">
+            <path fill="#1B3A6B" opacity="1" d="M59.61 54.45Q65.39 69.13 76.02 69.59L76.02 69.59L76.02 74.33Q66.31 73.63 50.60 73.63L50.60 73.63Q30.38 73.63 20.33 74.33L20.33 74.33L20.33 69.59Q29.34 69.24 33.21 67.39Q37.08 65.55 37.08 60.81L37.08 60.81Q37.08 56.77 34.31 49.72L34.31 49.72L19.76 10.90L-37.32 10.90L-47.02 35.97Q-51.76 47.99-51.76 55.38L-51.76 55.38Q-51.76 62.89-46.73 66.12Q-41.71 69.36-31.19 69.59L-31.19 69.59L-31.19 74.33Q-44.71 73.63-58.46 73.63L-58.46 73.63Q-69.09 73.63-76.13 74.33L-76.13 74.33L-76.13 69.59Q-64.35 66.93-57.53 49.03L-57.53 49.03L-1.85-94.34L1.96-94.34L59.61 54.45ZM18.02 6.16L-8.43-64.42L-35.58 6.16L18.02 6.16Z"/>
+            <g transform="matrix(0.4695431472081219 0 0 0.0592033383728436 2.749303007477e-8 -5.673884681099736)">
+              <rect fill="#FFFFFF" fill-rule="evenodd" x="-393.5" y="-393.5" width="787" height="787"/>
+            </g>
+            <g transform="matrix(1 0 0 1 -0.49652770900092946 -5.116250557073359)">
+              <path fill="#1B3A6B" opacity="1" d="M-41.04 6.38C-40.51 7.70-39.94 7.92-39.39 7.92C-38.89 7.92-38.12 7.82-37.67 7.57C-38.12 7.27-38.42 6.70-38.82 5.68L-43.53-6.25C-44.00-7.42-44.50-8.64-45.02-9.68C-46.04-9.68-47.01-9.56-47.41-9.46C-47.76-8.09-48.18-6.84-48.58-5.87L-53.41 6.38C-53.61 6.93-53.68 7.27-53.68 7.50C-53.68 7.82-53.46 7.92-53.19 7.92C-52.79 7.92-52.14 7.82-51.59 7.57C-51.59 7.17-51.44 6.58-51.09 5.68L-49.97 2.72L-42.48 2.72ZM-45.84-5.87L-43.03 1.32L-49.43 1.32L-46.26-6.92C-46.11-6.60-45.99-6.25-45.84-5.87Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M-26.39 1.72C-25.07 1.72-24.85 1.47-24.85 1.15C-24.85 0.87-24.92 0.55-25.17 0.18C-25.47 0.38-26.10 0.40-27.09 0.40L-27.66 0.40C-28.83 0.40-30.05 0.43-31.10 0.53C-31.10 1.05-31.00 1.62-30.88 1.97C-29.48 1.77-28.54 1.72-27.29 1.72Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M-6.42-8.21C-5.13-8.21-4.91-8.46-4.91-8.81C-4.91-9.09-4.98-9.51-5.23-9.83C-5.55-9.63-6.15-9.61-7.15-9.61L-12.72-9.61C-13.89-9.61-15.14-9.56-16.19-9.43C-15.99-8.04-15.94-7.12-15.94-5.87L-15.94 6.38C-15.94 7.70-15.51 7.92-14.99 7.92C-14.57 7.92-13.84 7.82-13.32 7.57C-13.57 7.27-13.60 6.68-13.60 5.68L-13.60-0.42C-13.12-0.44-12.65-0.44-12.13-0.44L-7.12-0.44C-5.83-0.44-5.60-0.69-5.60-1.02C-5.60-1.29-5.68-1.71-5.93-2.01C-6.23-1.86-6.85-1.84-7.84-1.84L-12.50-1.84C-12.87-1.84-13.25-1.84-13.60-1.81L-13.60-6.25C-13.60-6.94-13.62-7.57-13.67-8.19C-13.25-8.21-12.82-8.21-12.35-8.21Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M4.11 6.38C4.11 7.70 4.56 7.92 5.08 7.92C5.55 7.92 6.30 7.82 6.85 7.57C6.50 7.27 6.45 6.68 6.45 5.68L6.45-6.25C6.45-7.42 6.40-8.66 6.27-9.71C5.30-9.71 4.28-9.58 3.86-9.46C4.06-8.04 4.11-7.12 4.11-5.87Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M16.21 6.38C16.21 7.70 16.56 7.92 17.01 7.92C17.38 7.92 17.98 7.82 18.45 7.57C18.20 7.27 18.18 6.68 18.18 5.68L18.18-5.70L27.69 7.47C27.84 7.82 28.11 7.92 28.39 7.92C28.78 7.92 29.43 7.82 29.93 7.57C29.58 7.27 29.53 6.68 29.53 5.68L29.53-6.25C29.53-7.42 29.48-8.64 29.38-9.68C28.56-9.68 27.74-9.56 27.39-9.46C27.54-8.04 27.56-7.12 27.56-5.87L27.56 3.56L18.03-9.63L18.03-9.68C17.18-9.68 16.31-9.56 15.96-9.46C16.16-8.04 16.21-7.12 16.21-5.87Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M51.07 6.38C51.59 7.70 52.17 7.92 52.71 7.92C53.21 7.92 53.98 7.82 54.43 7.57C53.98 7.27 53.68 6.70 53.29 5.68L48.58-6.25C48.11-7.42 47.61-8.64 47.09-9.68C46.07-9.68 45.09-9.56 44.70-9.46C44.35-8.09 43.92-6.84 43.53-5.87L38.69 6.38C38.50 6.93 38.42 7.27 38.42 7.50C38.42 7.82 38.64 7.92 38.92 7.92C39.32 7.92 39.96 7.82 40.51 7.57C40.51 7.17 40.66 6.58 41.01 5.68L42.13 2.72L49.63 2.72ZM46.26-5.87L49.08 1.32L42.68 1.32L45.84-6.92C45.99-6.60 46.11-6.25 46.26-5.87Z"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </a>
+    <div class="navbar-nav">
+      <a href="#how" class="navbar-link">Как работает</a>
+      <a href="#pricing" class="navbar-link">Тарифы</a>
+      <a href="#blog" class="navbar-link">Блог</a>
+      <a href="https://lk.a-fina.ru" class="btn-lk">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Личный кабинет
+      </a>
+      <a href="#form" class="btn btn-primary">Запросить демо →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Виртуальный казначей для 1С</div>
+
+      <!-- A: фокус на освобождении от рутины -->
+      <h1 class="hero-h1">
+        Казначейство<br>
+        без рутины.<br>
+        <span class="gradient-text">Счета — без ручного ввода.</span>
+      </h1>
+
+      <!-- A sub -->
+      <p class="hero-sub">
+        Виртуальный казначей читает счета из почты, ЭДО и папок
+        и сам создаёт заявки на оплату в 1С.
+        100 документов бесплатно. Один день внедрения.
+      </p>
+
+      <!-- Stats bar -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">87%</div>
+          <div class="hero-stat-lbl">документов — автоматически</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">22 сек</div>
+          <div class="hero-stat-lbl">вместо 10 мин на счёт</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">1 день</div>
+          <div class="hero-stat-lbl">внедрение</div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#form" class="btn btn-primary btn-lg">Покажем на ваших счетах →</a>
+        <a href="#how" class="btn btn-outline btn-lg">Как это работает</a>
+      </div>
+
+      <div class="hero-proof">
+        <span class="proof-item"><span class="proof-check">✓</span> 1С:ERP, КА, УТ, УНФ</span>
+        <span class="proof-item"><span class="proof-check">✓</span> Email / Папка / Диадок / СБИС</span>
+        <span class="proof-item"><span class="proof-check">✓</span> Демо на ваших счетах</span> 100 docs бесплатно</span>
+      </div>
+    </div>
+
+    <!-- HERO RIGHT: живой журнал документов -->
+    <div class="hero-right">
+      <div class="hero-right-head">
+        <span class="hero-right-title">Журнал документов</span>
+        <span class="live-badge">
+          <span class="live-dot"></span>
+          Агент работает
+        </span>
+      </div>
+      <div class="hero-right-body">
+        <div class="doc-row">
+          <div class="doc-icon email">📧</div>
+          <div class="doc-info">
+            <div class="doc-name">Счёт №2847 от ООО ТехСнаб</div>
+            <div class="doc-meta">Email · 247 500 ₽ · только что</div>
+          </div>
+          <div class="doc-status">
+            <span class="status-badge s-done">✓ В 1С</span>
+          </div>
+        </div>
+        <div class="doc-row processing">
+          <div class="doc-icon pdf">📄</div>
+          <div class="doc-info">
+            <div class="doc-name">УПД №1094 от АО Логистик</div>
+            <div class="doc-meta">Диадок · 89 200 ₽ · 1 мин назад</div>
+          </div>
+          <div class="doc-status">
+            <span class="status-badge s-proc">⟳ Обработка</span>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon pdf">📄</div>
+          <div class="doc-info">
+            <div class="doc-name">Счёт-фактура №38 от ИП Иванов</div>
+            <div class="doc-meta">Папка · 12 600 ₽ · 4 мин назад</div>
+          </div>
+          <div class="doc-status">
+            <span class="status-badge s-done">✓ В 1С</span>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon edo">📑</div>
+          <div class="doc-info">
+            <div class="doc-name">Акт №201 от ООО МедиаГрупп</div>
+            <div class="doc-meta">СБИС · 55 000 ₽ · 6 мин назад</div>
+          </div>
+          <div class="doc-status">
+            <span class="status-badge s-done">✓ В 1С</span>
+          </div>
+        </div>
+        <div class="doc-row">
+          <div class="doc-icon email">📧</div>
+          <div class="doc-info">
+            <div class="doc-name">Счёт №562 от ЗАО СтройПром</div>
+            <div class="doc-meta">Email · 1 340 000 ₽ · 9 мин назад</div>
+          </div>
+          <div class="doc-status">
+            <span class="status-badge s-wait">Ожидает</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right-footer">
+        <div class="footer-stat">
+          <div class="footer-stat-val">47</div>
+          <div class="footer-stat-lbl">Сегодня</div>
+        </div>
+        <div class="footer-stat">
+          <div class="footer-stat-val" style="color:var(--success)">44</div>
+          <div class="footer-stat-lbl">Создано в 1С</div>
+        </div>
+        <div class="footer-stat">
+          <div class="footer-stat-val">22 сек</div>
+          <div class="footer-stat-lbl">Среднее время</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section" id="how">
+  <div class="section-inner">
+    <div class="eyebrow">Как работает</div>
+    <h2 class="section-h">От входящего счёта до заявки в 1С — без вашего участия</h2>
+    <p class="section-p">Агент работает 24/7. Вы видите только результат в 1С.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">📥</div>
+        <h3 class="step-title">Забирает счёт</h3>
+        <p class="step-text">Агент следит за источниками и автоматически забирает все входящие документы — в любом формате.</p>
+        <div class="step-sources">
+          <span class="source-tag">Email</span>
+          <span class="source-tag">Папка</span>
+          <span class="source-tag">Диадок</span>
+          <span class="source-tag">СБИС</span>
+          <span class="source-tag">Такском</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">🧠</div>
+        <h3 class="step-title">Распознаёт и заполняет</h3>
+        <p class="step-text">AI читает все поля, находит контрагента и договор в 1С, подставляет статью затрат из истории платежей. Контроль дублей.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">✅</div>
+        <h3 class="step-title">Создаёт заявку в 1С</h3>
+        <p class="step-text">Заявка на расходование ДС появляется в 1С уже заполненной. Вы только согласовываете. Ни одной опечатки — агент не ошибается.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section results-section">
+  <div class="section-inner">
+    <div class="eyebrow">Результаты</div>
+    <h2 class="section-h">Цифры из реального пилота</h2>
+    <p class="section-p">Производственно-торговая компания, 1С:ERP, 50+ платежей в день.</p>
+    <div class="results-grid">
+      <div class="result-card">
+        <div><span class="result-num">10</span><span class="result-unit">×</span></div>
+        <div class="result-label">Ускорение обработки одного счёта</div>
+        <div class="result-vs">
+          <span class="result-old">227 сек</span>
+          <span>→</span>
+          <span class="result-new">22 сек</span>
+        </div>
+      </div>
+      <div class="result-card">
+        <div><span class="result-num">87</span><span class="result-unit">%</span></div>
+        <div class="result-label">Документов обрабатывается полностью автоматически</div>
+        <div class="result-vs">
+          <span class="result-old">0% до</span>
+          <span>→</span>
+          <span class="result-new">87% сейчас</span>
+        </div>
+      </div>
+      <div class="result-card">
+        <div><span class="result-num">1</span><span class="result-unit"> день</span></div>
+        <div class="result-label">Время внедрения — без IT-проекта</div>
+        <div class="result-vs">
+          <span class="result-old">месяцы у других</span>
+          <span>→</span>
+          <span class="result-new">1 день</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="section-inner">
+    <div class="eyebrow">Тарифы</div>
+    <h2 class="section-h">Платите за документы, а не за воздух</h2>
+    <p class="section-p">Никаких абонентских плат за простой. Ноль документов — ноль оплаты.</p>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Старт</div>
+        <div class="plan-price"><span class="plan-num">46</span><span class="plan-per">₽ / документ</span></div>
+        <div class="plan-vol">до 200 документов в месяц</div>
+        <ul class="plan-feats">
+          <li><span class="fc">✓</span> Email + папка + ЭДО</li>
+          <li><span class="fc">✓</span> Все форматы счетов</li>
+          <li><span class="fc">✓</span> Контроль дублей</li>
+          <li><span class="fc">✓</span> 1С: ERP, КА, УТ, УНФ</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Запросить демо</button>
+      </div>
+      <div class="plan featured">
+        <div class="plan-popular">Популярный</div>
+        <div class="plan-name">Бизнес</div>
+        <div class="plan-price"><span class="plan-num">30</span><span class="plan-per">₽ / документ</span></div>
+        <div class="plan-vol">до 1 000 документов в месяц</div>
+        <ul class="plan-feats">
+          <li><span class="fc">✓</span> Всё из тарифа Старт</li>
+          <li><span class="fc">✓</span> Проверка договоров</li>
+          <li><span class="fc">✓</span> Статья затрат из истории</li>
+          <li><span class="fc">✓</span> Несколько юрлиц</li>
+        </ul>
+        <button class="plan-btn plan-btn-primary" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Запросить демо</button>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Про</div>
+        <div class="plan-price"><span class="plan-num">22</span><span class="plan-per">₽ / документ</span></div>
+        <div class="plan-vol">свыше 1 000 документов в месяц</div>
+        <ul class="plan-feats">
+          <li><span class="fc">✓</span> Всё из тарифа Бизнес</li>
+          <li><span class="fc">✓</span> Приоритетная поддержка</li>
+          <li><span class="fc">✓</span> SLA на обработку</li>
+          <li><span class="fc">✓</span> Выделенный менеджер</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Запросить демо</button>
+      </div>
+    </div>
+    <p class="pricing-note">Внедрение бесплатно · Договор от 1 месяца · Без скрытых платежей</p>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="section form-section" id="form">
+  <div class="form-inner">
+
+    <div>
+      <h2 class="form-h">Покажем на ваших счетах</h2>
+      <p class="form-sub">Пришлите один реальный счёт — настроим демо и покажем как агент обработает именно его. 30 минут.</p>
+    </div>
+      <h2 class="form-h">Начните прямо сейчас</h2>
+      <p class="form-sub">Заполните форму — свяжемся в течение дня, подключим агента к вашей 1С и дадим первые 100 документов бесплатно.</p>
+    </div>
+
+    <div class="form-card">
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Имя</label>
+          <input class="form-input" type="text" placeholder="Андрей">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Телефон</label>
+          <input class="form-input" type="tel" placeholder="+7 (___) ___-__-__">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="cfo@company.ru">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Компания и платформа 1С</label>
+        <input class="form-input" type="text" placeholder="ООО Ромашка · 1С:ERP">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Объём счетов в месяц</label>
+        <select class="form-select">
+          <option value="">Выберите</option>
+          <option>До 200 документов</option>
+          <option>200–1 000 документов</option>
+          <option>Свыше 1 000 документов</option>
+        </select>
+      </div>
+      <button class="btn-submit btn-submit-aqua">Запросить демо на моих счетах →</button>
+      <p class="form-fine">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности. Данные не передаются третьим лицам.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 363 212" style="height:36px;width:auto;display:block;">
+        <g transform="matrix(0.6585365853658536 0 0 0.6585365853658536 181.82926827457777 110.70324390243908)">
+          <path fill="#FFFFFF" opacity="1" d="M59.61 54.45Q65.39 69.13 76.02 69.59L76.02 69.59L76.02 74.33Q66.31 73.63 50.60 73.63L50.60 73.63Q30.38 73.63 20.33 74.33L20.33 74.33L20.33 69.59Q29.34 69.24 33.21 67.39Q37.08 65.55 37.08 60.81L37.08 60.81Q37.08 56.77 34.31 49.72L34.31 49.72L19.76 10.90L-37.32 10.90L-47.02 35.97Q-51.76 47.99-51.76 55.38L-51.76 55.38Q-51.76 62.89-46.73 66.12Q-41.71 69.36-31.19 69.59L-31.19 69.59L-31.19 74.33Q-44.71 73.63-58.46 73.63L-58.46 73.63Q-69.09 73.63-76.13 74.33L-76.13 74.33L-76.13 69.59Q-64.35 66.93-57.53 49.03L-57.53 49.03L-1.85-94.34L1.96-94.34L59.61 54.45ZM18.02 6.16L-8.43-64.42L-35.58 6.16L18.02 6.16Z"/>
+          <g transform="matrix(0.4695431472081219 0 0 0.0592033383728436 2.749303007477e-8 -5.673884681099736)">
+            <rect fill="#112850" fill-rule="evenodd" x="-393.5" y="-393.5" width="787" height="787"/>
+          </g>
+          <g transform="matrix(1 0 0 1 -0.49652770900092946 -5.116250557073359)">
+            <path fill="#FFFFFF" opacity="1" d="M-41.04 6.38C-40.51 7.70-39.94 7.92-39.39 7.92C-38.89 7.92-38.12 7.82-37.67 7.57C-38.12 7.27-38.42 6.70-38.82 5.68L-43.53-6.25C-44.00-7.42-44.50-8.64-45.02-9.68C-46.04-9.68-47.01-9.56-47.41-9.46C-47.76-8.09-48.18-6.84-48.58-5.87L-53.41 6.38C-53.61 6.93-53.68 7.27-53.68 7.50C-53.68 7.82-53.46 7.92-53.19 7.92C-52.79 7.92-52.14 7.82-51.59 7.57C-51.59 7.17-51.44 6.58-51.09 5.68L-49.97 2.72L-42.48 2.72ZM-45.84-5.87L-43.03 1.32L-49.43 1.32L-46.26-6.92C-46.11-6.60-45.99-6.25-45.84-5.87Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M-26.39 1.72C-25.07 1.72-24.85 1.47-24.85 1.15C-24.85 0.87-24.92 0.55-25.17 0.18C-25.47 0.38-26.10 0.40-27.09 0.40L-27.66 0.40C-28.83 0.40-30.05 0.43-31.10 0.53C-31.10 1.05-31.00 1.62-30.88 1.97C-29.48 1.77-28.54 1.72-27.29 1.72Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M-6.42-8.21C-5.13-8.21-4.91-8.46-4.91-8.81C-4.91-9.09-4.98-9.51-5.23-9.83C-5.55-9.63-6.15-9.61-7.15-9.61L-12.72-9.61C-13.89-9.61-15.14-9.56-16.19-9.43C-15.99-8.04-15.94-7.12-15.94-5.87L-15.94 6.38C-15.94 7.70-15.51 7.92-14.99 7.92C-14.57 7.92-13.84 7.82-13.32 7.57C-13.57 7.27-13.60 6.68-13.60 5.68L-13.60-0.42C-13.12-0.44-12.65-0.44-12.13-0.44L-7.12-0.44C-5.83-0.44-5.60-0.69-5.60-1.02C-5.60-1.29-5.68-1.71-5.93-2.01C-6.23-1.86-6.85-1.84-7.84-1.84L-12.50-1.84C-12.87-1.84-13.25-1.84-13.60-1.81L-13.60-6.25C-13.60-6.94-13.62-7.57-13.67-8.19C-13.25-8.21-12.82-8.21-12.35-8.21Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M4.11 6.38C4.11 7.70 4.56 7.92 5.08 7.92C5.55 7.92 6.30 7.82 6.85 7.57C6.50 7.27 6.45 6.68 6.45 5.68L6.45-6.25C6.45-7.42 6.40-8.66 6.27-9.71C5.30-9.71 4.28-9.58 3.86-9.46C4.06-8.04 4.11-7.12 4.11-5.87Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M16.21 6.38C16.21 7.70 16.56 7.92 17.01 7.92C17.38 7.92 17.98 7.82 18.45 7.57C18.20 7.27 18.18 6.68 18.18 5.68L18.18-5.70L27.69 7.47C27.84 7.82 28.11 7.92 28.39 7.92C28.78 7.92 29.43 7.82 29.93 7.57C29.58 7.27 29.53 6.68 29.53 5.68L29.53-6.25C29.53-7.42 29.48-8.64 29.38-9.68C28.56-9.68 27.74-9.56 27.39-9.46C27.54-8.04 27.56-7.12 27.56-5.87L27.56 3.56L18.03-9.63L18.03-9.68C17.18-9.68 16.31-9.56 15.96-9.46C16.16-8.04 16.21-7.12 16.21-5.87Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M51.07 6.38C51.59 7.70 52.17 7.92 52.71 7.92C53.21 7.92 53.98 7.82 54.43 7.57C53.98 7.27 53.68 6.70 53.29 5.68L48.58-6.25C48.11-7.42 47.61-8.64 47.09-9.68C46.07-9.68 45.09-9.56 44.70-9.46C44.35-8.09 43.92-6.84 43.53-5.87L38.69 6.38C38.50 6.93 38.42 7.27 38.42 7.50C38.42 7.82 38.64 7.92 38.92 7.92C39.32 7.92 39.96 7.82 40.51 7.57C40.51 7.17 40.66 6.58 41.01 5.68L42.13 2.72L49.63 2.72ZM46.26-5.87L49.08 1.32L42.68 1.32L45.84-6.92C45.99-6.60 46.11-6.25 46.26-5.87Z"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Политика конфиденциальности</a>
+      <a href="#" class="footer-link">a-fina.ru</a>
+    </div>
+    <span class="footer-copy">© 2026 A-FINA</span>
+  </div>
+</footer>
+
+
+</body>
+</html>
+
