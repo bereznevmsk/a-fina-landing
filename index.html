@@ -330,15 +330,52 @@ body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);backgro
 .footer-link:hover{color:rgba(255,255,255,.6)}
 
 @media(max-width:900px){
-  .hero-inner,.steps,.results-grid,.pricing-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
+  /* Navbar */
+  .navbar-inner{padding:0 20px}
+  .navbar-nav .navbar-link{display:none}
+  .btn-lk{display:none}
+
+  /* Hero */
+  .hero{padding:48px 20px}
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-h1{font-size:36px;letter-spacing:-1px}
+  .hero-sub{font-size:16px}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .hero-stat:last-child{grid-column:1/-1;border-right:none}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn{text-align:center;justify-content:center}
+  .btn-lg{padding:13px 20px;font-size:14px}
+  .hero-right{display:none}
+
+  /* Sections */
+  .section{padding:48px 20px}
+  .section-h{font-size:26px;letter-spacing:-.5px}
+  .section-p{font-size:15px;margin-bottom:32px}
+  .steps,.results-grid,.pricing-grid{grid-template-columns:1fr}
   .steps::before{display:none}
+
+  /* Form */
+  .form-section{padding:48px 20px}
+  .form-h{font-size:26px}
+  .form-row{grid-template-columns:1fr}
+  .form-card{padding:20px}
+
+  /* Footer */
+  .footer{padding:24px 20px}
+  .footer-inner{flex-direction:column;gap:16px;text-align:center}
+  .footer-links{justify-content:center}
+}
+
+@media(max-width:480px){
+  .hero-h1{font-size:30px}
+  .hero-stats{grid-template-columns:1fr}
+  .hero-stat:last-child{grid-column:auto;border-right:none}
+  .hero-stat{border-right:none;border-bottom:1px solid var(--border)}
+  .pricing-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-
-</div>
 
 <!-- NAVBAR -->
 <nav class="navbar">
@@ -421,7 +458,7 @@ body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);backgro
       <div class="hero-proof">
         <span class="proof-item"><span class="proof-check">✓</span> 1С:ERP, КА, УТ, УНФ</span>
         <span class="proof-item"><span class="proof-check">✓</span> Email / Папка / Диадок / СБИС</span>
-        <span class="proof-item"><span class="proof-check">✓</span> Демо на ваших счетах</span> 100 docs бесплатно</span>
+        <span class="proof-item"><span class="proof-check">✓</span> Демо на ваших счетах</span>
       </div>
     </div>
 
@@ -631,9 +668,6 @@ body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);backgro
     <div>
       <h2 class="form-h">Покажем на ваших счетах</h2>
       <p class="form-sub">Пришлите один реальный счёт — настроим демо и покажем как агент обработает именно его. 30 минут.</p>
-    </div>
-      <h2 class="form-h">Начните прямо сейчас</h2>
-      <p class="form-sub">Заполните форму — свяжемся в течение дня, подключим агента к вашей 1С и дадим первые 100 документов бесплатно.</p>
     </div>
 
     <div class="form-card">
