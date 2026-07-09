@@ -42,6 +42,23 @@ a{color:inherit}
 .navbar-link{font-size:14px;font-weight:500;color:var(--storm);text-decoration:none;transition:color .15s}
 .navbar-link:hover{color:var(--navy)}
 .navbar-link.current{color:var(--navy);font-weight:700}
+/* Гамбургер-меню (мобильная навигация) */
+.navbar-toggle{
+  display:none;align-items:center;justify-content:center;
+  width:36px;height:36px;flex-shrink:0;padding:0;
+  border:1.5px solid var(--border);border-radius:var(--r-md);
+  background:var(--white);color:var(--navy);cursor:pointer;
+}
+.navbar-toggle:hover{border-color:var(--navy);background:var(--sky)}
+.navbar-mobile-menu{
+  display:none;flex-direction:column;
+  position:absolute;top:100%;left:0;right:0;
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:8px 20px 16px;box-shadow:0 12px 24px rgba(27,58,107,.10);
+}
+.navbar-mobile-menu.open{display:flex}
+.navbar-mobile-menu .navbar-link{display:block;padding:12px 0;font-size:15px;border-bottom:1px solid var(--border)}
+.navbar-mobile-menu .btn-lk{display:inline-flex;margin-top:12px;align-self:flex-start}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:var(--r-md);font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
 .btn-primary{background:var(--aqua);color:var(--white)}
 .btn-primary:hover{background:var(--aqua-dark)}
@@ -107,6 +124,7 @@ a{color:inherit}
   .navbar-inner{padding:0 20px}
   .navbar-nav .navbar-link{display:none}
   .btn-lk{display:none}
+  .navbar-toggle{display:inline-flex}
   .blog-article-wrap,.blog-article-body,.blog-article-footer-meta{padding-left:20px;padding-right:20px}
   .blog-article-cover{padding:0 20px}
   .blog-article-stats{grid-template-columns:1fr}
@@ -147,8 +165,20 @@ a{color:inherit}
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Личный кабинет
       </a>
+      <button class="navbar-toggle" id="navbar-toggle" aria-expanded="false" aria-controls="navbar-mobile-menu" aria-label="Открыть меню">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <a href="/#form" class="btn btn-primary">Запросить демо →</a>
     </div>
+  </div>
+  <div class="navbar-mobile-menu" id="navbar-mobile-menu">
+    <a href="/#how" class="navbar-link">Как работает</a>
+    <a href="/#pricing" class="navbar-link">Тарифы</a>
+    <a href="/blog/" class="navbar-link current">Блог</a>
+    <a href="https://lk.a-fina.ru" class="btn-lk">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      Личный кабинет
+    </a>
   </div>
 </nav>
 
@@ -263,5 +293,6 @@ a{color:inherit}
   </div>
 </footer>
 
+<script src="/nav.js"></script>
 </body>
 </html>
