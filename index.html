@@ -336,6 +336,10 @@ body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);backgro
 .btn-submit-gold{background:var(--gold);color:var(--navy-dark)}
 .btn-submit-gold:hover{filter:brightness(.95);box-shadow:0 6px 20px rgba(255,203,5,.3)}
 .form-fine{font-size:11px;color:rgba(255,255,255,.25);margin-top:12px;line-height:1.5}
+.form-fine.form-fine-error{color:#FF8A80}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form-thanks{color:var(--white);font-size:17px;line-height:1.6;padding:20px 0;font-weight:600}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 
 /* ══ FOOTER ══ */
 .footer{background:var(--navy-dark);padding:28px 40px;border-top:1px solid rgba(255,255,255,.06)}
@@ -700,36 +704,39 @@ body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);backgro
       <p class="form-sub">Пришлите один реальный счёт — настроим демо и покажем как агент обработает именно его. 30 минут.</p>
     </div>
 
-    <div class="form-card">
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label">Имя</label>
-          <input class="form-input" type="text" placeholder="Андрей">
+    <div class="form-card" id="form-card">
+      <form id="lead-form" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Имя</label>
+            <input class="form-input" type="text" name="fio" placeholder="Андрей" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Телефон</label>
+            <input class="form-input" type="tel" name="phone" placeholder="+7 (___) ___-__-__">
+          </div>
         </div>
         <div class="form-field">
-          <label class="form-label">Телефон</label>
-          <input class="form-input" type="tel" placeholder="+7 (___) ___-__-__">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" name="email" placeholder="cfo@company.ru" required>
         </div>
-      </div>
-      <div class="form-field">
-        <label class="form-label">Email</label>
-        <input class="form-input" type="email" placeholder="cfo@company.ru">
-      </div>
-      <div class="form-field">
-        <label class="form-label">Компания и платформа 1С</label>
-        <input class="form-input" type="text" placeholder="ООО Ромашка · 1С:ERP">
-      </div>
-      <div class="form-field">
-        <label class="form-label">Объём счетов в месяц</label>
-        <select class="form-select">
-          <option value="">Выберите</option>
-          <option>До 200 документов</option>
-          <option>200–1 000 документов</option>
-          <option>Свыше 1 000 документов</option>
-        </select>
-      </div>
-      <button class="btn-submit btn-submit-aqua">Запросить демо на моих счетах →</button>
-      <p class="form-fine">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности. Данные не передаются третьим лицам.</p>
+        <div class="form-field">
+          <label class="form-label">Компания и платформа 1С</label>
+          <input class="form-input" type="text" name="company" placeholder="ООО Ромашка · 1С:ERP">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Объём счетов в месяц</label>
+          <select class="form-select" name="volume">
+            <option value="">Выберите</option>
+            <option>До 200 документов</option>
+            <option>200–1 000 документов</option>
+            <option>Свыше 1 000 документов</option>
+          </select>
+        </div>
+        <input type="text" name="hp_field" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn-submit btn-submit-aqua" id="lead-submit-btn">Запросить демо на моих счетах →</button>
+        <p class="form-fine" id="lead-form-msg">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности. Данные не передаются третьим лицам.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -763,6 +770,57 @@ body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);backgro
 </footer>
 
 <script src="/nav.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('lead-form');
+  if (!form) return;
+
+  var btn = document.getElementById('lead-submit-btn');
+  var msg = document.getElementById('lead-form-msg');
+  var card = document.getElementById('form-card');
+  var btnDefaultText = btn.textContent;
+  var fineDefaultText = msg.textContent;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    var payload = {
+      fio: form.fio.value.trim(),
+      phone: form.phone.value.trim(),
+      email: form.email.value.trim(),
+      company: form.company.value.trim(),
+      volume: form.volume.value,
+      hp_field: form.hp_field.value
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Отправляем…';
+    msg.textContent = fineDefaultText;
+    msg.classList.remove('form-fine-error');
+
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (resp) {
+      if (!resp.ok) throw new Error('bad status ' + resp.status);
+      return resp.json();
+    }).then(function () {
+      card.innerHTML = '<p class="form-thanks">Спасибо! Свяжемся в течение рабочего дня.</p>';
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = btnDefaultText;
+      msg.textContent = 'Не получилось отправить, напишите на bereznev.msk@yandex.ru напрямую';
+      msg.classList.add('form-fine-error');
+    });
+  });
+})();
+</script>
 </body>
 </html>
 
