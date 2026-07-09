@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Блог — A-FINA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #1B3A6B;
+  --navy-dark: #112850;
+  --navy-light:#2A4F8A;
+  --blue:      #0079C2;
+  --aqua:      #00AEEF;
+  --aqua-dark: #0090D0;
+  --aqua-light:#E8F7FD;
+  --purple:    #8045B0;
+  --pink:      #E12991;
+  --storm:     #687480;
+  --sky:       #EEF6FC;
+  --sky-mid:   #A7B9CF;
+  --white:     #FFFFFF;
+  --off-white: #F8FAFB;
+  --border:    #E2EBF3;
+  --body-text: #687480;
+  --grad: linear-gradient(90deg, #00AEEF 0%, #8045B0 55%, #E12991 100%);
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-2xl:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;color:var(--body-text);background:var(--white);line-height:1.6}
+a{color:inherit}
+.navbar{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.navbar::before{content:'';display:block;height:3px;background:var(--grad)}
+.navbar-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px}
+.navbar-logo{display:flex;align-items:center;gap:0;text-decoration:none}
+.logo-svg-wrap{height:44px;display:flex;align-items:center}
+.btn-lk{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r-md);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;border:1.5px solid var(--border);background:var(--white);color:var(--navy);text-decoration:none;transition:all .15s}
+.btn-lk:hover{border-color:var(--navy);background:var(--sky)}
+.navbar-nav{display:flex;align-items:center;gap:32px}
+.navbar-link{font-size:14px;font-weight:500;color:var(--storm);text-decoration:none;transition:color .15s}
+.navbar-link:hover{color:var(--navy)}
+.navbar-link.current{color:var(--navy);font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:var(--r-md);font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-primary{background:var(--aqua);color:var(--white)}
+.btn-primary:hover{background:var(--aqua-dark)}
+.section{padding:80px 40px;border-bottom:1px solid var(--border)}
+.section-inner{max-width:1120px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--aqua);margin-bottom:10px}
+.section-h{font-size:36px;font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1.15;margin-bottom:14px}
+.section-p{font-size:17px;color:var(--storm);max-width:580px;line-height:1.75;margin-bottom:48px}
+.blog-head{padding-bottom:32px}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;text-decoration:none;background:var(--white);transition:all .15s}
+.blog-card:hover{border-color:var(--aqua);box-shadow:0 8px 24px rgba(27,58,107,.08);transform:translateY(-2px)}
+.blog-cover{height:160px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background-size:cover;background-position:center}
+.blog-cover.cov-1{background-image:url('assets/cover-1.png')}
+.blog-cover.cov-2{background-image:url('assets/cover-2.png')}
+.blog-cover.cov-3{background-image:url('assets/cover-3.png')}
+.blog-card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+.blog-card-title{font-size:17px;font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:8px}
+.blog-card-excerpt{font-size:13px;color:var(--storm);line-height:1.6;margin-bottom:16px;flex:1}
+.blog-card-meta{font-size:12px;color:var(--sky-mid);display:flex;align-items:center;gap:6px}
+.blog-cta{background:var(--navy);padding:80px 40px;text-align:center;position:relative;overflow:hidden;border-bottom:none}
+.blog-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
+.blog-cta-inner{max-width:560px;margin:0 auto;position:relative;z-index:1}
+.blog-cta h2{font-size:36px;font-weight:900;color:var(--white);letter-spacing:-1px;margin-bottom:10px;line-height:1.1}
+.blog-cta p{font-size:16px;color:rgba(255,255,255,.55);margin-bottom:28px;line-height:1.65}
+.footer{background:var(--navy-dark);padding:28px 40px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{display:flex;align-items:center}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.2)}
+.footer-links{display:flex;gap:20px}
+.footer-link{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none}
+.footer-link:hover{color:rgba(255,255,255,.6)}
+@media(max-width:900px){
+  .navbar-inner{padding:0 20px}
+  .navbar-nav .navbar-link{display:none}
+  .btn-lk{display:none}
+  .section{padding:48px 20px}
+  .section-h{font-size:26px;letter-spacing:-.5px}
+  .blog-grid{grid-template-columns:1fr}
+  .blog-cta{padding:48px 20px}
+  .footer-inner{flex-direction:column;gap:16px;text-align:center}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo">
+      <div class="logo-svg-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 363 212" style="height:44px;width:auto;display:block;">
+          <g transform="matrix(0.6585365853658536 0 0 0.6585365853658536 181.82926827457777 110.70324390243908)">
+            <path fill="#1B3A6B" opacity="1" d="M59.61 54.45Q65.39 69.13 76.02 69.59L76.02 69.59L76.02 74.33Q66.31 73.63 50.60 73.63L50.60 73.63Q30.38 73.63 20.33 74.33L20.33 74.33L20.33 69.59Q29.34 69.24 33.21 67.39Q37.08 65.55 37.08 60.81L37.08 60.81Q37.08 56.77 34.31 49.72L34.31 49.72L19.76 10.90L-37.32 10.90L-47.02 35.97Q-51.76 47.99-51.76 55.38L-51.76 55.38Q-51.76 62.89-46.73 66.12Q-41.71 69.36-31.19 69.59L-31.19 69.59L-31.19 74.33Q-44.71 73.63-58.46 73.63L-58.46 73.63Q-69.09 73.63-76.13 74.33L-76.13 74.33L-76.13 69.59Q-64.35 66.93-57.53 49.03L-57.53 49.03L-1.85-94.34L1.96-94.34L59.61 54.45ZM18.02 6.16L-8.43-64.42L-35.58 6.16L18.02 6.16Z"/>
+            <g transform="matrix(0.4695431472081219 0 0 0.0592033383728436 2.749303007477e-8 -5.673884681099736)"><rect fill="#FFFFFF" fill-rule="evenodd" x="-393.5" y="-393.5" width="787" height="787"/></g>
+            <g transform="matrix(1 0 0 1 -0.49652770900092946 -5.116250557073359)">
+              <path fill="#1B3A6B" opacity="1" d="M-41.04 6.38C-40.51 7.70-39.94 7.92-39.39 7.92C-38.89 7.92-38.12 7.82-37.67 7.57C-38.12 7.27-38.42 6.70-38.82 5.68L-43.53-6.25C-44.00-7.42-44.50-8.64-45.02-9.68C-46.04-9.68-47.01-9.56-47.41-9.46C-47.76-8.09-48.18-6.84-48.58-5.87L-53.41 6.38C-53.61 6.93-53.68 7.27-53.68 7.50C-53.68 7.82-53.46 7.92-53.19 7.92C-52.79 7.92-52.14 7.82-51.59 7.57C-51.59 7.17-51.44 6.58-51.09 5.68L-49.97 2.72L-42.48 2.72ZM-45.84-5.87L-43.03 1.32L-49.43 1.32L-46.26-6.92C-46.11-6.60-45.99-6.25-45.84-5.87Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M-26.39 1.72C-25.07 1.72-24.85 1.47-24.85 1.15C-24.85 0.87-24.92 0.55-25.17 0.18C-25.47 0.38-26.10 0.40-27.09 0.40L-27.66 0.40C-28.83 0.40-30.05 0.43-31.10 0.53C-31.10 1.05-31.00 1.62-30.88 1.97C-29.48 1.77-28.54 1.72-27.29 1.72Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M-6.42-8.21C-5.13-8.21-4.91-8.46-4.91-8.81C-4.91-9.09-4.98-9.51-5.23-9.83C-5.55-9.63-6.15-9.61-7.15-9.61L-12.72-9.61C-13.89-9.61-15.14-9.56-16.19-9.43C-15.99-8.04-15.94-7.12-15.94-5.87L-15.94 6.38C-15.94 7.70-15.51 7.92-14.99 7.92C-14.57 7.92-13.84 7.82-13.32 7.57C-13.57 7.27-13.60 6.68-13.60 5.68L-13.60-0.42C-13.12-0.44-12.65-0.44-12.13-0.44L-7.12-0.44C-5.83-0.44-5.60-0.69-5.60-1.02C-5.60-1.29-5.68-1.71-5.93-2.01C-6.23-1.86-6.85-1.84-7.84-1.84L-12.50-1.84C-12.87-1.84-13.25-1.84-13.60-1.81L-13.60-6.25C-13.60-6.94-13.62-7.57-13.67-8.19C-13.25-8.21-12.82-8.21-12.35-8.21Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M4.11 6.38C4.11 7.70 4.56 7.92 5.08 7.92C5.55 7.92 6.30 7.82 6.85 7.57C6.50 7.27 6.45 6.68 6.45 5.68L6.45-6.25C6.45-7.42 6.40-8.66 6.27-9.71C5.30-9.71 4.28-9.58 3.86-9.46C4.06-8.04 4.11-7.12 4.11-5.87Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M16.21 6.38C16.21 7.70 16.56 7.92 17.01 7.92C17.38 7.92 17.98 7.82 18.45 7.57C18.20 7.27 18.18 6.68 18.18 5.68L18.18-5.70L27.69 7.47C27.84 7.82 28.11 7.92 28.39 7.92C28.78 7.92 29.43 7.82 29.93 7.57C29.58 7.27 29.53 6.68 29.53 5.68L29.53-6.25C29.53-7.42 29.48-8.64 29.38-9.68C28.56-9.68 27.74-9.56 27.39-9.46C27.54-8.04 27.56-7.12 27.56-5.87L27.56 3.56L18.03-9.63L18.03-9.68C17.18-9.68 16.31-9.56 15.96-9.46C16.16-8.04 16.21-7.12 16.21-5.87Z"/>
+              <path fill="#1B3A6B" opacity="1" d="M51.07 6.38C51.59 7.70 52.17 7.92 52.71 7.92C53.21 7.92 53.98 7.82 54.43 7.57C53.98 7.27 53.68 6.70 53.29 5.68L48.58-6.25C48.11-7.42 47.61-8.64 47.09-9.68C46.07-9.68 45.09-9.56 44.70-9.46C44.35-8.09 43.92-6.84 43.53-5.87L38.69 6.38C38.50 6.93 38.42 7.27 38.42 7.50C38.42 7.82 38.64 7.92 38.92 7.92C39.32 7.92 39.96 7.82 40.51 7.57C40.51 7.17 40.66 6.58 41.01 5.68L42.13 2.72L49.63 2.72ZM46.26-5.87L49.08 1.32L42.68 1.32L45.84-6.92C45.99-6.60 46.11-6.25 46.26-5.87Z"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </a>
+    <div class="navbar-nav">
+      <a href="/#how" class="navbar-link">Как работает</a>
+      <a href="/#pricing" class="navbar-link">Тарифы</a>
+      <a href="/blog/" class="navbar-link current">Блог</a>
+      <a href="https://lk.a-fina.ru" class="btn-lk">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Личный кабинет
+      </a>
+      <a href="/#form" class="btn btn-primary">Запросить демо →</a>
+    </div>
+  </div>
+</nav>
+
+<section class="section blog-head">
+  <div class="section-inner">
+    <div class="eyebrow">Блог</div>
+    <h1 class="section-h">Практика построения корпоративного казначейства</h1>
+    <p class="section-p" style="margin-bottom:0">Разбираем реальные кейсы автоматизации, цифры из пилотов и находки из мира корпоративных финансов — своих и с рынка.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;border-bottom:none">
+  <div class="section-inner">
+    <div class="blog-grid">
+      <a href="/blog/agentnyy-ii-v-kaznacheystve-9-sekund/" class="blog-card">
+        <div class="blog-cover cov-1"></div>
+        <div class="blog-card-body">
+          <div class="blog-card-title">Валютный риск на $2,3 млн и 9 секунд на реакцию</div>
+          <div class="blog-card-excerpt">Как работает агентный ИИ в западном казначействе — реальный кейс J.P. Morgan.</div>
+          <div class="blog-card-meta">09 июля 2026 · 4 мин чтения</div>
+        </div>
+      </a>
+      <a href="/blog/cash-management-ai-90-protsentov/" class="blog-card">
+        <div class="blog-cover cov-2"></div>
+        <div class="blog-card-body">
+          <div class="blog-card-title">Domino's Pizza сократила ручную работу с деньгами на 90%</div>
+          <div class="blog-card-excerpt">Что стоит за этой цифрой — три слоя автоматизации, обзор Capgemini.</div>
+          <div class="blog-card-meta">09 июля 2026 · 4 мин чтения</div>
+        </div>
+      </a>
+      <a href="/blog/ai-protiv-moshennichestva-4-mlrd/" class="blog-card">
+        <div class="blog-cover cov-3"></div>
+        <div class="blog-card-body">
+          <div class="blog-card-title">$4 млрд предотвращённого мошенничества и минус 95% ложных срабатываний</div>
+          <div class="blog-card-excerpt">Три реальных кейса детекции мошенничества с помощью ИИ.</div>
+          <div class="blog-card-meta">09 июля 2026 · 4 мин чтения</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="blog-cta">
+  <div class="blog-cta-inner">
+    <h2>Покажем на ваших счетах</h2>
+    <p>Пришлите один реальный счёт — настроим демо за 30 минут.</p>
+    <a href="/#form" class="btn btn-primary btn-lg">Запросить демо →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 363 212" style="height:36px;width:auto;display:block;">
+        <g transform="matrix(0.6585365853658536 0 0 0.6585365853658536 181.82926827457777 110.70324390243908)">
+          <path fill="#FFFFFF" opacity="1" d="M59.61 54.45Q65.39 69.13 76.02 69.59L76.02 69.59L76.02 74.33Q66.31 73.63 50.60 73.63L50.60 73.63Q30.38 73.63 20.33 74.33L20.33 74.33L20.33 69.59Q29.34 69.24 33.21 67.39Q37.08 65.55 37.08 60.81L37.08 60.81Q37.08 56.77 34.31 49.72L34.31 49.72L19.76 10.90L-37.32 10.90L-47.02 35.97Q-51.76 47.99-51.76 55.38L-51.76 55.38Q-51.76 62.89-46.73 66.12Q-41.71 69.36-31.19 69.59L-31.19 69.59L-31.19 74.33Q-44.71 73.63-58.46 73.63L-58.46 73.63Q-69.09 73.63-76.13 74.33L-76.13 74.33L-76.13 69.59Q-64.35 66.93-57.53 49.03L-57.53 49.03L-1.85-94.34L1.96-94.34L59.61 54.45ZM18.02 6.16L-8.43-64.42L-35.58 6.16L18.02 6.16Z"/>
+          <g transform="matrix(0.4695431472081219 0 0 0.0592033383728436 2.749303007477e-8 -5.673884681099736)"><rect fill="#112850" fill-rule="evenodd" x="-393.5" y="-393.5" width="787" height="787"/></g>
+          <g transform="matrix(1 0 0 1 -0.49652770900092946 -5.116250557073359)">
+            <path fill="#FFFFFF" opacity="1" d="M-41.04 6.38C-40.51 7.70-39.94 7.92-39.39 7.92C-38.89 7.92-38.12 7.82-37.67 7.57C-38.12 7.27-38.42 6.70-38.82 5.68L-43.53-6.25C-44.00-7.42-44.50-8.64-45.02-9.68C-46.04-9.68-47.01-9.56-47.41-9.46C-47.76-8.09-48.18-6.84-48.58-5.87L-53.41 6.38C-53.61 6.93-53.68 7.27-53.68 7.50C-53.68 7.82-53.46 7.92-53.19 7.92C-52.79 7.92-52.14 7.82-51.59 7.57C-51.59 7.17-51.44 6.58-51.09 5.68L-49.97 2.72L-42.48 2.72ZM-45.84-5.87L-43.03 1.32L-49.43 1.32L-46.26-6.92C-46.11-6.60-45.99-6.25-45.84-5.87Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M-26.39 1.72C-25.07 1.72-24.85 1.47-24.85 1.15C-24.85 0.87-24.92 0.55-25.17 0.18C-25.47 0.38-26.10 0.40-27.09 0.40L-27.66 0.40C-28.83 0.40-30.05 0.43-31.10 0.53C-31.10 1.05-31.00 1.62-30.88 1.97C-29.48 1.77-28.54 1.72-27.29 1.72Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M-6.42-8.21C-5.13-8.21-4.91-8.46-4.91-8.81C-4.91-9.09-4.98-9.51-5.23-9.83C-5.55-9.63-6.15-9.61-7.15-9.61L-12.72-9.61C-13.89-9.61-15.14-9.56-16.19-9.43C-15.99-8.04-15.94-7.12-15.94-5.87L-15.94 6.38C-15.94 7.70-15.51 7.92-14.99 7.92C-14.57 7.92-13.84 7.82-13.32 7.57C-13.57 7.27-13.60 6.68-13.60 5.68L-13.60-0.42C-13.12-0.44-12.65-0.44-12.13-0.44L-7.12-0.44C-5.83-0.44-5.60-0.69-5.60-1.02C-5.60-1.29-5.68-1.71-5.93-2.01C-6.23-1.86-6.85-1.84-7.84-1.84L-12.50-1.84C-12.87-1.84-13.25-1.84-13.60-1.81L-13.60-6.25C-13.60-6.94-13.62-7.57-13.67-8.19C-13.25-8.21-12.82-8.21-12.35-8.21Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M4.11 6.38C4.11 7.70 4.56 7.92 5.08 7.92C5.55 7.92 6.30 7.82 6.85 7.57C6.50 7.27 6.45 6.68 6.45 5.68L6.45-6.25C6.45-7.42 6.40-8.66 6.27-9.71C5.30-9.71 4.28-9.58 3.86-9.46C4.06-8.04 4.11-7.12 4.11-5.87Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M16.21 6.38C16.21 7.70 16.56 7.92 17.01 7.92C17.38 7.92 17.98 7.82 18.45 7.57C18.20 7.27 18.18 6.68 18.18 5.68L18.18-5.70L27.69 7.47C27.84 7.82 28.11 7.92 28.39 7.92C28.78 7.92 29.43 7.82 29.93 7.57C29.58 7.27 29.53 6.68 29.53 5.68L29.53-6.25C29.53-7.42 29.48-8.64 29.38-9.68C28.56-9.68 27.74-9.56 27.39-9.46C27.54-8.04 27.56-7.12 27.56-5.87L27.56 3.56L18.03-9.63L18.03-9.68C17.18-9.68 16.31-9.56 15.96-9.46C16.16-8.04 16.21-7.12 16.21-5.87Z"/>
+            <path fill="#FFFFFF" opacity="1" d="M51.07 6.38C51.59 7.70 52.17 7.92 52.71 7.92C53.21 7.92 53.98 7.82 54.43 7.57C53.98 7.27 53.68 6.70 53.29 5.68L48.58-6.25C48.11-7.42 47.61-8.64 47.09-9.68C46.07-9.68 45.09-9.56 44.70-9.46C44.35-8.09 43.92-6.84 43.53-5.87L38.69 6.38C38.50 6.93 38.42 7.27 38.42 7.50C38.42 7.82 38.64 7.92 38.92 7.92C39.32 7.92 39.96 7.82 40.51 7.57C40.51 7.17 40.66 6.58 41.01 5.68L42.13 2.72L49.63 2.72ZM46.26-5.87L49.08 1.32L42.68 1.32L45.84-6.92C45.99-6.60 46.11-6.25 46.26-5.87Z"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="footer-links">
+      <a href="/#" class="footer-link">Политика конфиденциальности</a>
+      <a href="/" class="footer-link">a-fina.ru</a>
+    </div>
+    <span class="footer-copy">© 2026 A-FINA</span>
+  </div>
+</footer>
+
+</body>
+</html>
