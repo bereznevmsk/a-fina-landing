@@ -3,19 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Валютный риск на $2,3 млн и 9 секунд на реакцию — Блог A-FINA</title>
+<title>Политика конфиденциальности — A-FINA</title>
+<meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy:      #1B3A6B;
   --navy-dark: #112850;
-  --navy-light:#2A4F8A;
   --blue:      #0079C2;
   --aqua:      #00AEEF;
   --aqua-dark: #0090D0;
   --aqua-light:#E8F7FD;
-  --purple:    #8045B0;
-  --pink:      #E12991;
   --storm:     #687480;
   --sky:       #EEF6FC;
   --sky-mid:   #A7B9CF;
@@ -41,8 +39,6 @@ a{color:inherit}
 .navbar-nav{display:flex;align-items:center;gap:32px}
 .navbar-link{font-size:14px;font-weight:500;color:var(--storm);text-decoration:none;transition:color .15s}
 .navbar-link:hover{color:var(--navy)}
-.navbar-link.current{color:var(--navy);font-weight:700}
-/* Гамбургер-меню (мобильная навигация) */
 .navbar-toggle{
   display:none;align-items:center;justify-content:center;
   width:36px;height:36px;flex-shrink:0;padding:0;
@@ -62,55 +58,22 @@ a{color:inherit}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:var(--r-md);font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
 .btn-primary{background:var(--aqua);color:var(--white)}
 .btn-primary:hover{background:var(--aqua-dark)}
-.btn-sm{padding:8px 16px;font-size:13px}
 
-.blog-article-wrap{max-width:760px;margin:0 auto;padding:40px 40px 0}
-.blog-article-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--aqua-dark);text-decoration:none;margin-bottom:28px}
-.blog-article-back:hover{color:var(--navy)}
-.blog-article-meta-top{font-size:13px;color:var(--sky-mid);font-weight:500;display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.blog-article-h1{font-size:32px;font-weight:800;letter-spacing:-1px;color:var(--navy);line-height:1.25;margin-bottom:20px}
-.blog-article-lead{font-size:18px;color:var(--storm);line-height:1.6;max-width:700px}
-
-.blog-article-cover{max-width:1120px;margin:32px auto 0;padding:0 40px}
-.blog-article-cover-inner{height:320px;border-radius:var(--r-xl);background-image:url('../assets/cover-1.png');background-size:cover;background-position:center}
-
-.blog-article-body{max-width:760px;margin:0 auto;padding:48px 40px 0;font-size:16px;line-height:1.8;color:var(--storm)}
-.blog-article-body p{margin-bottom:22px}
-.blog-article-body h2{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--navy);margin:40px 0 16px}
-.blog-article-body strong{color:var(--navy);font-weight:700}
-
-.blog-article-quote{border-left:3px solid var(--aqua);background:var(--sky);padding:20px 24px;border-radius:0 var(--r-md) var(--r-md) 0;margin:32px 0;font-size:17px;font-weight:700;color:var(--navy);line-height:1.5;letter-spacing:-.3px}
-
-.blog-article-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0}
-.blog-article-stat{border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 16px;text-align:center}
-.blog-article-stat-num{font-size:26px;font-weight:900;color:var(--navy);letter-spacing:-1px}
-.blog-article-stat-label{font-size:12px;color:var(--sky-mid);margin-top:4px}
-
-.blog-article-source{font-size:13px;color:var(--sky-mid);border-top:1px solid var(--border);padding-top:16px;margin-top:36px}
-.blog-article-source a{color:var(--aqua-dark);text-decoration:none}
-.blog-article-source a:hover{text-decoration:underline}
-
-.blog-article-footer-meta{max-width:760px;margin:8px auto 0;padding:24px 40px 56px;border-top:1px solid var(--border);font-size:13px;color:var(--sky-mid);display:flex;align-items:center;gap:8px}
-
-.section{padding:56px 40px 72px}
-.section-inner{max-width:1120px;margin:0 auto}
-.related-title{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:24px}
-.blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.blog-card{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;text-decoration:none;background:var(--white);transition:all .15s}
-.blog-card:hover{border-color:var(--aqua);box-shadow:0 8px 24px rgba(27,58,107,.08);transform:translateY(-2px)}
-.blog-cover{height:140px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background-size:cover;background-position:center}
-.blog-cover.cov-2{background-image:url('../assets/cover-2.png')}
-.blog-cover.cov-3{background-image:url('../assets/cover-3.png')}
-.blog-card-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
-.blog-card-title{font-size:16px;font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:8px}
-.blog-card-excerpt{font-size:13px;color:var(--storm);line-height:1.6;margin-bottom:14px;flex:1}
-.blog-card-meta{font-size:12px;color:var(--sky-mid)}
-
-.blog-cta{background:var(--navy);padding:64px 40px;text-align:center;position:relative;overflow:hidden}
-.blog-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
-.blog-cta-inner{max-width:560px;margin:0 auto;position:relative;z-index:1}
-.blog-cta h2{font-size:30px;font-weight:900;color:var(--white);letter-spacing:-1px;margin-bottom:10px;line-height:1.15}
-.blog-cta p{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:24px;line-height:1.6}
+.legal-wrap{max-width:760px;margin:0 auto;padding:48px 40px 80px}
+.legal-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--aqua-dark);text-decoration:none;margin-bottom:28px}
+.legal-back:hover{color:var(--navy)}
+.legal-h1{font-size:32px;font-weight:800;letter-spacing:-1px;color:var(--navy);line-height:1.25;margin-bottom:10px}
+.legal-updated{font-size:13px;color:var(--sky-mid);margin-bottom:40px}
+.legal-body{font-size:16px;line-height:1.8;color:var(--storm)}
+.legal-body h2{font-size:20px;font-weight:700;letter-spacing:-.3px;color:var(--navy);margin:36px 0 14px}
+.legal-body h2:first-child{margin-top:0}
+.legal-body p{margin-bottom:16px}
+.legal-body ul{margin:0 0 16px 22px}
+.legal-body li{margin-bottom:8px}
+.legal-body strong{color:var(--navy);font-weight:700}
+.legal-body a{color:var(--aqua-dark);text-decoration:none}
+.legal-body a:hover{text-decoration:underline}
+.legal-note{border-left:3px solid var(--aqua);background:var(--sky);padding:16px 20px;border-radius:0 var(--r-md) var(--r-md) 0;margin:24px 0;font-size:14px;color:var(--navy)}
 
 .footer{background:var(--navy-dark);padding:28px 40px;border-top:1px solid rgba(255,255,255,.06)}
 .footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
@@ -125,11 +88,7 @@ a{color:inherit}
   .navbar-nav .navbar-link{display:none}
   .btn-lk{display:none}
   .navbar-toggle{display:inline-flex}
-  .blog-article-wrap,.blog-article-body,.blog-article-footer-meta{padding-left:20px;padding-right:20px}
-  .blog-article-cover{padding:0 20px}
-  .blog-article-stats{grid-template-columns:1fr}
-  .blog-grid{grid-template-columns:1fr}
-  .section{padding:40px 20px}
+  .legal-wrap{padding:32px 20px 56px}
   .footer-inner{flex-direction:column;gap:16px;text-align:center}
   .footer-links{justify-content:center}
 }
@@ -160,7 +119,7 @@ a{color:inherit}
     <div class="navbar-nav">
       <a href="/#how" class="navbar-link">Как работает</a>
       <a href="/#pricing" class="navbar-link">Тарифы</a>
-      <a href="/blog/" class="navbar-link current">Блог</a>
+      <a href="/blog/" class="navbar-link">Блог</a>
       <a href="https://lk.a-fina.ru" class="btn-lk">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Личный кабинет
@@ -174,7 +133,7 @@ a{color:inherit}
   <div class="navbar-mobile-menu" id="navbar-mobile-menu">
     <a href="/#how" class="navbar-link">Как работает</a>
     <a href="/#pricing" class="navbar-link">Тарифы</a>
-    <a href="/blog/" class="navbar-link current">Блог</a>
+    <a href="/blog/" class="navbar-link">Блог</a>
     <a href="https://lk.a-fina.ru" class="btn-lk">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
       Личный кабинет
@@ -182,90 +141,70 @@ a{color:inherit}
   </div>
 </nav>
 
-<div class="blog-article-wrap">
-  <a href="/blog/" class="blog-article-back">
+<div class="legal-wrap">
+  <a href="/" class="legal-back">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-    Все статьи
+    На главную
   </a>
 
-  <div class="blog-article-meta-top">
-    <span>09 июля 2026</span>
-    <span>·</span>
-    <span>4 мин чтения</span>
-  </div>
-  <h1 class="blog-article-h1">Валютный риск на $2,3 млн и 9 секунд на реакцию: как работает агентный ИИ в западном казначействе</h1>
-  <p class="blog-article-lead">J.P. Morgan описывает случай из практики одной из компаний: агентная система нашла валютное несоответствие, сама предложила хедж — и подготовила его к подписанию быстрее, чем человек успел бы прочитать письмо.</p>
-</div>
+  <h1 class="legal-h1">Политика конфиденциальности</h1>
+  <div class="legal-updated">Действует с 17 июля 2026 года</div>
 
-<div class="blog-article-cover">
-  <div class="blog-article-cover-inner"></div>
-</div>
+  <div class="legal-body">
 
-<article class="blog-article-body">
-  <p>J.P. Morgan приводит реальный случай из практики промышленной компании среднего размера — название компании не раскрывается. Агентная система отслеживала курсы валют по контрактам с поставщиками и заметила изменение, которое к концу квартала обернулось бы валютным разрывом в $2,3 млн. Система не просто сообщила о проблеме: сама предложила хедж, собрала котировки у нескольких контрагентов и подготовила сделку к подписанию. Весь путь — от обнаружения риска до готового решения на столе у казначея — занял девять секунд. Решение при этом принимает не система: сделка ложится на подпись человеку, как обычная заявка на согласование.</p>
+    <h2>1. Общие положения</h2>
+    <p>Настоящая Политика конфиденциальности (далее — «Политика») определяет порядок обработки персональных данных сервисом <strong>A-FINA</strong> (сайт a-fina.ru, личный кабинет lk.a-fina.ru и программный агент, устанавливаемый на стороне клиента; далее вместе — «Сервис»).</p>
+    <p>Политика разработана в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и применяется к любым данным, которые Оператор может получить о пользователе сайта, личного кабинета и о лицах, упомянутых в документах, обрабатываемых Сервисом.</p>
 
-  <div class="blog-article-stats">
-    <div class="blog-article-stat"><div class="blog-article-stat-num">$2,3 млн</div><div class="blog-article-stat-label">валютный риск</div></div>
-    <div class="blog-article-stat"><div class="blog-article-stat-num">9 сек</div><div class="blog-article-stat-label">до готового решения</div></div>
-    <div class="blog-article-stat"><div class="blog-article-stat-num">&lt;1 из 10</div><div class="blog-article-stat-label">компаний уже внедрили</div></div>
-  </div>
+    <h2>2. Оператор персональных данных</h2>
+    <p>Оператором персональных данных является: <strong>[юридическое лицо/ИП, ИНН, ОГРН/ОГРНИП, юридический адрес — уточняется]</strong>.</p>
+    <p>Связаться с Оператором по вопросам обработки персональных данных можно по адресу электронной почты: <a href="mailto:bereznev.msk@yandex.ru">bereznev.msk@yandex.ru</a>.</p>
 
-  <p>В другом эпизоде та же система остановила счёт на оплату, распознав в нём признаки подделки — и не просто пометила его как «подозрительный», а подробно объяснила, что именно её насторожило.</p>
+    <h2>3. Какие данные мы собираем</h2>
+    <p><strong>3.1. Данные, которые пользователь вводит сам</strong> — при заполнении формы заявки на демонстрацию на сайте: имя, телефон, email, название компании и используемая платформа 1С, ориентировочный объём документов в месяц.</p>
+    <p><strong>3.2. Данные учётной записи личного кабинета</strong> — при регистрации и использовании lk.a-fina.ru: контактные данные представителя клиента, данные об организации-клиенте, техническая информация о работе установленного агента (статусы обработки документов, журнал событий).</p>
+    <p><strong>3.3. Данные из документов, которые обрабатывает агент</strong> — счета, счета-фактуры, УПД и другие первичные документы, которые клиент направляет на обработку. Такие документы могут содержать персональные данные третьих лиц (например, ФИО подписантов, контактные телефоны сотрудников контрагентов). Эти данные принадлежат клиенту и его контрагентам — Оператор обрабатывает их исключительно в рамках оказания услуги клиенту, а не в собственных целях.</p>
+    <p>Сайт a-fina.ru не использует рекламные или аналитические cookie-файлы сторонних сервисов на момент публикации настоящей Политики. Личный кабинет использует технические cookie-файлы, необходимые для работы авторизации.</p>
 
-  <div class="blog-article-quote">«Будущее казначейства — не чат-бот, а система контроля»</div>
+    <h2>4. Как мы защищаем данные из обрабатываемых документов</h2>
+    <p>Перед отправкой текста документа во внешние модели распознавания (LLM) агент по умолчанию заменяет чувствительные данные (ФИО, номера телефонов, банковские реквизиты, паспортные данные и другие категории) на обезличенные токены — эта защита работает локально на стороне клиента, до того как данные покидают его инфраструктуру. Для отдельных клиентов эта функция может быть отключена по их собственному явному решению, если маскировка не является для них критичной; ответственность за такое решение лежит на клиенте.</p>
+    <p>Итоговые документы (заявки, заказы и другие) создаются напрямую в информационной базе 1С клиента — на стороне Оператора эти документы не хранятся.</p>
 
-  <p>Автор материала, Зак Андерсон, специально уточняет: не стоит путать такую систему с чат-ботом. Побеждать на этом рынке, по его словам, будут не те компании, у которых ИИ просто «больше», а те, чей ИИ прозрачнее и понятнее — тот, которому можно доверить решение именно потому, что видно, как оно принято.</p>
+    <h2>5. Цели обработки</h2>
+    <ul>
+      <li>обработка заявки на демонстрацию Сервиса и связь с пользователем;</li>
+      <li>предоставление доступа к личному кабинету и работе программного агента;</li>
+      <li>оказание услуги по распознаванию документов и созданию документов в 1С клиента;</li>
+      <li>техническая поддержка, устранение сбоев, улучшение качества распознавания;</li>
+      <li>исполнение требований законодательства РФ.</li>
+    </ul>
 
-  <h2>Много ли компаний уже здесь</h2>
-  <p>Пока немного. По опросу BNP Paribas (октябрь 2025), из крупных международных компаний ИИ в казначействе внедрила меньше одной из десяти — при том что сами казначеи называют финансовую аналитику в реальном времени своим главным техническим приоритетом на ближайшие год-два. Там, где ИИ для прогнозирования уже работает, точность прогноза денежного потока растёт на 20–30%.</p>
+    <h2>6. Правовые основания обработки</h2>
+    <p>Обработка персональных данных осуществляется на основании согласия субъекта персональных данных (при заполнении формы на сайте, при регистрации в личном кабинете), а также в рамках исполнения договора оказания услуг с клиентом — в отношении данных, содержащихся в документах клиента.</p>
 
-  <h2>Похожие примеры на рынке</h2>
-  <p>Ещё в 2021 году BNY Mellon научила свою систему предсказывать сбои в расчётах по сделкам заранее, по историческим данным — до того как проблема возникает, а не после. А один из разработчиков казначейских платформ описывает сценарий «цифрового двойника CFO»: система прогоняет 4 000 сценариев по методу Монте-Карло и заранее показывает, что с вероятностью 12% компания нарушит ковенанты по долгу в ближайшие два месяца — до того, как это станет проблемой, а не постфактум в квартальном отчёте.</p>
+    <h2>7. Передача данных третьим лицам</h2>
+    <p>Для целей распознавания документов обезличенный (замаскированный) текст документа направляется через собственный сервер-прокси Оператора внешним провайдерам моделей распознавания (LLM). Провайдер получает только обезличенные данные при включённой маскировке.</p>
+    <p>Технические подрядчики Оператора (хостинг-провайдер, почтовый сервис) могут иметь техническую возможность доступа к данным в объёме, необходимом для оказания соответствующих услуг, и обязаны обеспечивать их конфиденциальность.</p>
+    <p>Оператор не передаёт персональные данные третьим лицам в целях, не связанных с оказанием услуг Сервиса, и не продаёт данные.</p>
 
-  <p>Во всех этих примерах — один и тот же принцип: система находит, объясняет и предлагает, а решает всё равно человек.</p>
+    <h2>8. Сроки хранения</h2>
+    <p>Данные заявки на демонстрацию хранятся до момента отзыва согласия или до утраты необходимости их обработки. Данные личного кабинета и документы, обрабатываемые агентом клиента, хранятся в течение срока действия договора с клиентом и удаляются или анонимизируются после его окончания, если более длительное хранение не требуется законодательством.</p>
 
-  <div class="blog-article-source">
-    Источник: Zack Anderson, J.P. Morgan Payments — <a href="https://www.jpmorgan.com/payments/newsroom/agentic-ai-corporate-cash-treasury-management" target="_blank" rel="noopener">Agentic AI in Corporate Cash &amp; Treasury Management</a>
-  </div>
-</article>
+    <h2>9. Права субъекта персональных данных</h2>
+    <p>Субъект персональных данных имеет право получить информацию об обработке своих данных, требовать их уточнения, блокирования или удаления, а также отозвать согласие на обработку, направив запрос на <a href="mailto:bereznev.msk@yandex.ru">bereznev.msk@yandex.ru</a>.</p>
 
-<div class="blog-article-footer-meta">
-  <span>Опубликовано 09 июля 2026</span>
-  <span>·</span>
-  <span>A-FINA</span>
-</div>
+    <h2>10. Меры защиты</h2>
+    <p>Оператор применяет организационные и технические меры защиты персональных данных, включая маскировку чувствительных данных перед их обработкой внешними моделями распознавания, ограничение доступа к данным и передачу данных только по защищённым каналам связи.</p>
 
-<section class="section">
-  <div class="section-inner">
-    <div class="related-title">Читайте также</div>
-    <div class="blog-grid">
-      <a href="/blog/cash-management-ai-90-protsentov/" class="blog-card">
-        <div class="blog-cover cov-2"></div>
-        <div class="blog-card-body">
-          <div class="blog-card-title">Domino's Pizza сократила ручную работу с деньгами на 90%</div>
-          <div class="blog-card-excerpt">Что стоит за этой цифрой — три слоя автоматизации от Capgemini.</div>
-          <div class="blog-card-meta">09 июля 2026 · 4 мин чтения</div>
-        </div>
-      </a>
-      <a href="/blog/ai-protiv-moshennichestva-4-mlrd/" class="blog-card">
-        <div class="blog-cover cov-3"></div>
-        <div class="blog-card-body">
-          <div class="blog-card-title">$4 млрд предотвращённого мошенничества и минус 95% ложных срабатываний</div>
-          <div class="blog-card-excerpt">Три реальных кейса детекции мошенничества с помощью ИИ.</div>
-          <div class="blog-card-meta">09 июля 2026 · 4 мин чтения</div>
-        </div>
-      </a>
+    <h2>11. Изменения Политики</h2>
+    <p>Оператор может обновлять настоящую Политику. Действующая редакция всегда доступна по адресу a-fina.ru/privacy/. Дата вступления в силу актуальной редакции указана в начале документа.</p>
+
+    <div class="legal-note">
+      Вопросы по обработке персональных данных — <a href="mailto:bereznev.msk@yandex.ru">bereznev.msk@yandex.ru</a>
     </div>
-  </div>
-</section>
 
-<section class="blog-cta">
-  <div class="blog-cta-inner">
-    <h2>Хотите увидеть похожее на своих счетах?</h2>
-    <p>Пришлите один реальный счёт — настроим демо за 30 минут.</p>
-    <a href="/#form" class="btn btn-primary">Запросить демо →</a>
   </div>
-</section>
+</div>
 
 <footer class="footer">
   <div class="footer-inner">
