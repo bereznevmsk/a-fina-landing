@@ -46,4 +46,11 @@
       msg.classList.add('form-fine-error');
     });
   });
+
+  document.querySelectorAll('.js-scroll-to-form').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var target = document.getElementById('form');
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 })();
